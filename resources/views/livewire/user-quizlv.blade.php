@@ -1,52 +1,64 @@
-<div class="bg-white rounded-lg shadow-lg p-5 md:p-20 mx-2">
-
+<div class="bg-white rounded-lg shadow-lg mx-auto relative md:h-[calc(100vh-(6rem*2)-1rem)] h-screen w-3/4">
     <!-- Start of quiz box -->
     @if($quizInProgress)
-    <div class="px-4 -py-3 sm:px-6 ">
-        <div class="flex max-w-auto justify-between">
-            <h1 class="text-sm leading-6 font-medium text-gray-900">
-                <span class="text-gray-400 font-extrabold p-1">User</span>
-                <span class="font-bold p-2 leading-loose bg-blue-500 text-white rounded-lg">{{Auth::user()->name}}</span>
-            </h1>
-            <p class="mt-1 max-w-2xl text-sm text-gray-500">
-                <span class="text-gray-400 font-extrabold p-1">Quiz Progress </span>
-                <span class="font-bold p-3 leading-loose bg-blue-500 text-white rounded-full">{{$count .'/'. $quizSize}}</span>
-            </p>
+    <div class="px-6 py-10 sm:px-14 bg-gray-100">
+        <div class="flex flex-col justify-center sm:grid sm:grid-cols-3 max-w-auto bg-slate-300">
+            <div class="flex justify-center sm:justify-start">
+                <img src="{{ asset('images/logo.png') }}" alt="logo" class="w-[135px] h-[158px]">
+            </div>
+            <div class="justify-center text-center relative">
+                <h2 class="font-bold text-4xl text-center">{{$currentQuestion->question}}</h2>
+                @if($learningMode)
+                <div x-data={show:false} class="block text-xs">
+                    <div class="p-1" id="headingOne">
+                        <button @click="show=!show" class="underline text-blue-500 hover:text-blue-700 focus:outline-none text-xs px-3" type="button">
+                            Explanation
+                        </button>
+                    </div>
+                    <div x-show="show" class="block p-2 italic text-slate-400 text-xl">
+                        {{$currentQuestion->explanation}}
+                    </div>
+                </div>
+                @endif
+                <div id="countdown" class="mt-10 text-4xl flex justify-center">
+                    <div>
+                        <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M40.4458 18.5459C40.6718 18.4479 40.8786 18.3103 41.0562 18.1397L42.0979 17.098C42.2913 16.9046 42.4448 16.6749 42.5494 16.4222C42.6541 16.1695 42.708 15.8986 42.708 15.6251C42.708 15.3515 42.6541 15.0807 42.5494 14.8279C42.4448 14.5752 42.2913 14.3456 42.0979 14.1522C41.9045 13.9587 41.6748 13.8053 41.4221 13.7006C41.1694 13.5959 40.8985 13.5421 40.625 13.5421C40.3514 13.5421 40.0806 13.5959 39.8278 13.7006C39.5751 13.8053 39.3455 13.9587 39.1521 14.1522L38.1104 15.1938L37.8708 15.5542C34.9121 12.7454 31.1154 10.982 27.0604 10.5334L27.0833 10.4167V8.33341H29.1666C30.3125 8.33341 31.25 7.39591 31.25 6.25008C31.25 5.10425 30.3125 4.16675 29.1666 4.16675H20.8333C19.6875 4.16675 18.75 5.10425 18.75 6.25008C18.75 7.39591 19.6875 8.33341 20.8333 8.33341H22.9166V10.4167L22.9416 10.5355C18.1859 11.0732 13.8158 13.4091 10.7266 17.0647C7.63749 20.7203 6.06322 25.4189 6.32636 30.1977C6.58949 34.9765 8.67011 39.4738 12.1419 42.7681C15.6138 46.0625 20.2139 47.9045 25 47.9167C28.4158 47.9156 31.7664 46.9815 34.69 45.2151C37.6136 43.4487 39.9992 40.9172 41.5891 37.894C43.1789 34.8707 43.9128 31.4706 43.7113 28.0608C43.5098 24.6509 42.3807 21.3609 40.4458 18.5459ZM25 43.7501C16.9604 43.7501 10.4166 37.2084 10.4166 29.1667C10.4166 21.1251 16.9604 14.5834 25 14.5834C33.0396 14.5834 39.5833 21.1251 39.5833 29.1667C39.5833 37.2084 33.0396 43.7501 25 43.7501ZM27.0833 27.0834V22.9167C27.0833 21.7709 26.1458 20.8334 25 20.8334C23.8541 20.8334 22.9166 21.7709 22.9166 22.9167V29.1667C22.9166 30.3126 23.8541 31.2501 25 31.2501H31.25C32.3958 31.2501 33.3333 30.3126 33.3333 29.1667C33.3333 28.0209 32.3958 27.0834 31.25 27.0834H27.0833ZM25 16.6667C18.1 16.6667 12.5 22.2667 12.5 29.1667C12.5 36.0667 18.1 41.6667 25 41.6667C31.9 41.6667 37.5 36.0667 37.5 29.1667C37.5 22.2667 31.9 16.6667 25 16.6667ZM25 39.5834C19.2562 39.5834 14.5833 34.9105 14.5833 29.1667C14.5833 23.423 19.2562 18.7501 25 18.7501C30.7437 18.7501 35.4166 23.423 35.4166 29.1667C35.4166 34.9105 30.7437 39.5834 25 39.5834Z" fill="#012A48" />
+                        </svg>
+                    </div>
+                    <div class="flex items-end">
+                        <span class="font-bold" id="countdown-minute">10</span>:<span class="font-bold" id="countdown-second">10</span>
+                    </div>
+                </div>
+                <p class="max-w-2xl text-xl font-semibold text-white bg-red-pdi px-5 py-1 rounded-lg absolute left-1/2 translate-x-[-50%] -bottom-16">
+                    Pertanyaan ke-{{$count}} dari {{$quizSize}}
+                </p>
+            </div>
+            <div class="relative">
+                <img src="{{ asset('images/kpu-mascot.png') }}" alt="logo" class="w-[325px] md:absolute md:-top-36 md:left-1/2 md:translate-x-[-50%]">
+            </div>
         </div>
     </div>
     <div class="bg-white shadow overflow-hidden sm:rounded-lg mt-6">
         <form wire:submit.prevent>
-            <div class="px-4 py-5 sm:px-6">
-                <h3 class="text-lg leading-6 mb-2 font-medium text-gray-900">
-                    <span class="mr-2 font-extrabold"> {{$count}}</span> {{$currentQuestion->question}}
-                    @if($learningMode)
-                    <div x-data={show:false} class="block text-xs">
-                        <div class="p-1" id="headingOne">
-                            <button @click="show=!show" class="underline text-blue-500 hover:text-blue-700 focus:outline-none text-xs px-3" type="button">
-                                Explanation
-                            </button>
-                        </div>
-                        <div x-show="show" class="block p-2 bg-green-100 text-xs">
-                            {{$currentQuestion->explanation}}
-                        </div>
-                    </div>
-                    @endif
-                </h3>
+            <div class="px-6 py-5 md:px-14 md:grid md:grid-cols-2 md:gap-5">
                 @foreach($currentQuestion->answers as $answer)
                 <label for="question-{{$answer->id}}">
-                    <div class="max-w-auto px-3 py-3 m-3 text-gray-800 rounded-lg border-2 border-gray-300 text-sm ">
-                        <span class="mr-2 font-extrabold"><input id="question-{{$answer->id}}" value="{{$answer->id .','.$answer->is_checked}}" wire:model="userAnswered" type="checkbox"> </span> {{$answer->answer}}
+                    <div class="max-w-auto p-5 m-3 text-gray-800 rounded-lg border-2 border-gray-300 text-base font-extrabold ">
+                        <span class="mr-2 font-extrabold">
+                            <input id="question-{{$answer->id}}" value="{{$answer->id .','.$answer->is_checked}}" wire:model="userAnswered" type="radio">
+                        </span> {{$answer->answer}}
                     </div>
                 </label>
                 @endforeach
             </div>
             <div class="flex items-center justify-end mt-4">
-                @if($count < $quizSize) <button wire:click="nextQuestion" type="submit" @if($isDisabled) disabled='disabled' @endif class="m-4 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition">
-                    {{ __('Next Question') }}
+                @if($count < $quizSize) <button wire:click="nextQuestion" type="submit" @if($isDisabled) disabled='disabled' @endif class="m-4 inline-flex items-center px-8 py-2 bg-red-pdi border border-transparent rounded-md font-semibold text-xl text-white uppercase tracking-widest hover:bg-red-chili active:bg-red-pdi focus:outline-none focus:border-red-pdi focus:ring focus:ring-red-chili disabled:opacity-25 transition">
+                    {{ __('Selanjutnya') }}
                     </button>
                     @else
-                    <button wire:click="nextQuestion" type="submit" @if($isDisabled) disabled='disabled' @endif class="m-4 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition">
-                        {{ __('Show Results') }}
+                    <button wire:click="nextQuestion" type="submit" @if($isDisabled) disabled='disabled' @endif class="m-4 inline-flex items-center px-8 py-2 bg-red-pdi border border-transparent rounded-md font-semibold text-xl text-white uppercase tracking-widest hover:bg-red-chili active:bg-red-pdi focus:outline-none focus:border-red-pdi focus:ring focus:ring-red-chili disabled:opacity-25 transition">
+                        {{ __('Selesai') }}
                     </button>
                     @endif
             </div>
@@ -112,10 +124,10 @@
     @endif
 
     @if($setupQuiz)
-    <section class="text-gray-600 mx-auto body-font">
-        <div class="container px-5 py-2 mx-auto">
-            <div class="flex flex-wrap -m-4">
-                <div class="p-4 md:w-1/2 w-full">
+    <section class="text-gray-600 mx-auto body-font h-full">
+        <div class="container px-5 py-2 mx-auto h-full">
+            <div class="flex flex-wrap h-full">
+                <div class="p-4 md:w-1/2 w-full flex-1">
                     <div class="h-full bg-gray-100 p-8 rounded">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="block w-5 h-5 text-gray-400 mb-4" viewBox="0 0 975.036 975.036">
                             <path d="M925.036 57.197h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.399 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l36 76c11.6 24.399 40.3 35.1 65.1 24.399 66.2-28.6 122.101-64.8 167.7-108.8 55.601-53.7 93.7-114.3 114.3-181.9 20.601-67.6 30.9-159.8 30.9-276.8v-239c0-27.599-22.401-50-50-50zM106.036 913.497c65.4-28.5 121-64.699 166.9-108.6 56.1-53.7 94.4-114.1 115-181.2 20.6-67.1 30.899-159.6 30.899-277.5v-239c0-27.6-22.399-50-50-50h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.4 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l35.9 75.8c11.601 24.399 40.501 35.2 65.301 24.399z"></path>
@@ -130,7 +142,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="p-4 md:w-1/2 w-full">
+                <div class="p-4 md:w-1/2 w-full flex-1">
                     <form wire:submit.prevent="startQuiz">
                         @csrf
                         <h2 class="text-gray-900 text-lg font-medium title-font mb-5">Take a Quiz</h2>
@@ -164,7 +176,7 @@
                             </select>
                             @error('quizSize') <span class="text-red-400 text-xs">{{ $message }}</span> @enderror
                         </div>
-                        <button type="submit" class="block w-full text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Start Quiz</button>
+                        <button type="submit" class="block w-full text-white bg-red-chili border-0 py-2 px-8 focus:outline-none hover:bg-red-chili rounded text-lg">Start Quiz</button>
                     </form>
                 </div>
             </div>

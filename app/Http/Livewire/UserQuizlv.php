@@ -20,7 +20,7 @@ class UserQuizlv extends Component
     public $quizPecentage;
     public $currentQuestion;
     public $setupQuiz = true;
-    public $userAnswered = [];
+    public $userAnswered = null;
     public $isDisabled = true;
     public $currectQuizAnswers;
     public $showResult = false;
@@ -51,7 +51,7 @@ class UserQuizlv extends Component
         // Push all the question ids to quiz_header table to retreve them while displaying the quiz details
         $this->quizid->questions_taken = serialize($this->answeredQuestions);
 
-        // Update the status of quiz as completed, this is used to resuming any uncompleted/abondened quizzes 
+        // Update the status of quiz as completed, this is used to resuming any uncompleted/abondened quizzes
         $this->quizid->completed = true;
 
         // Insert the quiz score to quiz_header table
@@ -75,7 +75,7 @@ class UserQuizlv extends Component
 
     public function updatedUserAnswered()
     {
-        if ((empty($this->userAnswered) || (count($this->userAnswered) > 1))) {
+        if ((empty($this->userAnswered) )) {
             $this->isDisabled = true;
         } else {
             $this->isDisabled = false;
@@ -131,6 +131,7 @@ class UserQuizlv extends Component
             'quiz_size' => $this->quizSize,
             'section_id' => $this->sectionId,
         ]);
+
         $this->count = 1;
         // Get the first/next question for the quiz.
         // Since we are using LiveWire component for quiz, the first quesiton and answers will be displayed through mount function.
@@ -145,7 +146,7 @@ class UserQuizlv extends Component
         $this->quizid->questions_taken = serialize($this->answeredQuestions);
 
         // Retrive the answer_id and value of answers clicked by the user and push them to Quiz table.
-        list($answerId, $isChoiceCorrect) = explode(',', $this->userAnswered[0]);
+        list($answerId, $isChoiceCorrect) = explode(',', $this->userAnswered);
 
         // Insert the current question_id, answer_id and whether it is correnct or wrong to quiz table.
         Quiz::create([

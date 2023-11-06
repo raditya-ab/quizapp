@@ -5,22 +5,44 @@
         </h2>
     </x-slot>
     <div class="max-w-7xl m-4 mx-auto sm:px-6 lg:px-8">
-        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+        <div class="overflow-hidden sm:rounded-lg">
             <div class="mx-auto">
-                <div class="flex justify-between items-center py-4">
-                    <form action="{{route('deleteQuestion',$question->id)}}" method="post">
-                        @csrf
-                        <button type="submit">
-                            <a class="tracking-wide font-bold rounded border-2 border-blue-500 hover:border-blue-500 bg-blue-500 text-white hover:bg-blue-600 transition shadow-md py-2 px-6 items-center">
-                                Delete Question
-                            </a>
-                        </button>
-                    </form>
-                    <a href="{{route('listSection')}}" class="tracking-wide font-bold rounded border-2 border-blue-500 hover:border-blue-500 bg-blue-500 text-white hover:bg-blue-600 transition shadow-md py-2 px-6 items-center">Back</a>
-                </div>
                 <!-- --------------------- START NEW TABLE --------------------->
 
-                <div class="flex flex-col">
+                <div class="flex flex-col mb-5">
+                    <div class="my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                        <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                            <div class="overflow-hidden">
+                                <div class="grid grid-cols-2 gap-1 w-1/2">
+                                    <div>Nama</div>
+                                    <div>{{ $question->question }}</div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-1 w-1/2">
+                                    <div>Deskripsi</div>
+                                    <div>{{ $question->explanation }}</div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-1 w-1/2">
+                                    <div>Status</div>
+                                    <div>{{ $question->is_active === '1'  ? 'Aktif' : 'Tidak Aktif' }}</div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-1 w-1/2">
+                                    <div>Details</div>
+                                    <div>{{ $question->section->name     }}</div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-1 w-1/2">
+                                    <div>Created By</div>
+                                    <div>{{ $question->user->name    }}</div>
+                                </div>
+                                <div class="flex justify-end">
+                                    <a class="uppercase tracking-wide font-bold rounded border-2 border-poor-green hover:border-poor-green-dark bg-poor-green text-white hover:bg-poor-green-dark transition shadow-md py-2 px-6 items-center">
+                                        Hapus Pertanyaan
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="flex flex-col">
                     <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                         <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                             <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
@@ -111,19 +133,19 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <!-- ---------------- END NEW TABLE --------------------- -->
 
                 <!-- --------------------- START NEW TABLE --------------------->
                 <div class="mt-5 rounded-t-lg">
                     <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="tracking-wide font-bold rounded border-2 bg-green-500 text-white  transition shadow-md py-2 px-6 items-center">
+                        <thead class="tracking-wide font-bold rounded border-2 bg-red-chili text-white  transition shadow-md py-2 px-6 items-center">
                             <tr class="max-w-auto">
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">
-                                    Answer
+                                    Jawaban
                                 </th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">
-                                    Choice
+                                    Pilihan
                                 </th>
                             </tr>
                         </thead>
@@ -140,7 +162,13 @@
                                     </div>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <div class="@if($answer->is_checked === '1') bg-green-400 p-1 text-white rounded-xl @endif justify-center mx-auto text-xs font-extrabold  "> {{ $answer->is_checked === '1'  ? 'Correct' : 'Wrong' }}</div>
+                                    <div class="p-1 justify-center mx-auto text-xs font-extrabold  ">
+                                        @if ($answer->is_checked === '1')
+                                        <span class="bg-poor-green uppercase px-3 py-1 rounded-md">Benar</span>
+                                        @else
+                                        <span class="bg-red-chili uppercase px-3 py-1 rounded-md text-white">Salah</span>
+                                        @endif
+                                    </div>
                                 </td>
                             </tr>
                             @endforeach

@@ -1,5 +1,44 @@
 <x-guest-layout>
-    <x-jet-authentication-card>
+    <div class="w-screen h-screen bg-cover bg-center bg-no-repeat bg-login flex justify-center items-center relative">
+        <div class="w-screen h-screen absolute top-0 bg-black opacity-60"></div>
+        <div class="flex flex-col w-[576px] h-[741px] bg-white rounded-lg p-16 relative">
+            <div class="flex items-center justify-between mb-10">
+                <div class="flex-none">
+                    <img src="{{ asset('images/logo.png') }}" alt="logo" class="w-20 h-20">
+                </div>
+                <div class="flex-1">
+                    <h1 class="text-4xl text-right font-bold uppercase">Login</h1>
+                </div>
+            </div>
+
+            <x-jet-validation-errors class="mb-4" />
+            @if (session('status'))
+            <div class="mb-4 font-medium text-sm text-green-600">
+                {{ session('status') }}
+            </div>
+            @endif
+            <form method="POST" action="{{ route('login') }}">
+                @csrf
+
+                <div>
+                    <x-jet-label for="email" value="{{ __('Email') }}" />
+                    <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
+                </div>
+
+                <div class="mt-4">
+                    <x-jet-label for="password" value="{{ __('Password') }}" />
+                    <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
+                </div>
+
+                <div class="flex items-center justify-end mt-8">
+                    <x-jet-button class="w-full table-cell align-middle uppercas hover:bg-red-pdi bg-red-chili text-lg">
+                        {{ __('Masuk') }}
+                    </x-jet-button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- <x-jet-authentication-card>
         <x-slot name="logo">
             <x-jet-authentication-card-logo />
         </x-slot>
@@ -49,5 +88,5 @@
                 </x-jet-button>
             </div>
         </form>
-    </x-jet-authentication-card>
+    </x-jet-authentication-card> -->
 </x-guest-layout>

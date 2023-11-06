@@ -23,14 +23,22 @@
 
 <body class="font-sans antialiased">
     <x-jet-banner />
-
-    <div class="min-h-screen bg-gray-100">
+    @php
+    if (Route::currentRouteName() !== 'startQuiz') {
+        $isQuiz = false;
+    } else {
+        $isQuiz = true;
+    }
+    @endphp
+    <div class="min-h-screen @if(!$isQuiz) bg-gray-100 @else bg-login bg-center bg-no-repeat bg-cover @endif">
+    @if (!$isQuiz)
         @livewire('navigation-menu')
+    @endif
 
         <!-- Page Heading -->
         @if (isset($header))
         <header class="bg-white shadow">
-            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto my-6 py-6 px-4 sm:px-6 lg:px-8">
                 {{ $header }}
             </div>
         </header>
