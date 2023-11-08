@@ -23,7 +23,7 @@
           <div class="grid grid-cols-4 mx-2 rounded-2xl bg-gray-300 my-5 py-5 px-5">
             <div class="text-center uppercase text-2xl font-bold flex justify-center items-center">
               @if ($iter)
-              <span class="py-2 px-4 rounded-full bg-red-pdi mr-3">
+              <span class="py-2 px-4 rounded-full bg-red-pdi text-white mr-3">
                 {{ $iter }}
               </span>
               @endif
