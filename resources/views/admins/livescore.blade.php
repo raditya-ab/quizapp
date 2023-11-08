@@ -18,19 +18,21 @@
         </div>
         @foreach ($data as $i => $datum)
         @php
-        if ($i < 3) { $iter=$i+1; }else { $iter=null; } $time_taken=$datum['total_time']->days*86400 + $datum['total_time']->h*3600
-          + $datum['total_time']->i*60 + $datum['total_time']->s
+        if ($i < 3) { $iter=$i+1; }else { $iter=null; }
           @endphp
           <div class="grid grid-cols-4 mx-2 rounded-2xl bg-gray-300 my-5 py-5 px-5">
             <div class="text-center uppercase text-2xl font-bold flex justify-center items-center">
+              @if ($iter)
               <span class="py-2 px-4 rounded-full bg-red-pdi mr-3">
                 {{ $iter }}
-              </span>{{ $datum['name'] }}
+              </span>
+              @endif
+              {{ $datum['name'] }}
             </div>
             <div class="text-center uppercase text-2xl font-bold flex justify-center items-center">{{ $datum['correct_answers'] }}</div>
-            <div class="text-center uppercase text-2xl font-bold flex justify-center items-center">{{ date("i:s", $time_taken) }}</div>
+            <div class="text-center uppercase text-2xl font-bold flex justify-center items-center">{{ date("i:s", $datum['total_time']) }}</div>
             <div class="text-center uppercase text-lg font-bold flex justify-start items-center">
-              <progress class="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto" id="quiz-{{$i}}" value="{{ $datum['score'] }}" max="100"> {{ $datum['score'] }} </progress>{{ $datum['score'] }}%
+              <progress class="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto" id="quiz-{{$i}}" value="{{ $datum['realtime_score'] }}" max="100"> {{ $datum['realtime_score'] }} </progress>{{ $datum['realtime_score'] }}%
             </div>
           </div>
           @endforeach
