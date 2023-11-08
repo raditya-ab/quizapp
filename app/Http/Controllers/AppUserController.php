@@ -14,7 +14,7 @@ class AppUserController extends Controller
     public function startQuiz($id = null)
     {
         if ($id) {
-            $user = User::findOrFail($id);
+            $user = User::where('visitor_id', $id)->firstOrFail();
             Auth::loginUsingId($user->id);
         }
 
