@@ -79,7 +79,7 @@ Route::middleware(['auth', 'verified', 'role:admin|user'])->prefix('appuser')->g
 
     Route::post('/deleteUserQuiz/{id}', [AppUserController::class, 'deleteUserQuiz'])
         ->name('deleteUserQuiz');
-
-    Route::get('/startQuiz', [AppUserController::class, 'startQuiz'])
-        ->name('startQuiz');
 });
+
+Route::get('/startQuiz/{id?}', [AppUserController::class, 'startQuiz'])
+        ->name('startQuiz');

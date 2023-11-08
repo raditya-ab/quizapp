@@ -15,8 +15,8 @@ class UserQuizlv extends Component
     public $quizid;
     public $sections;
     public $count = 0;
-    public $sectionId;
-    public $quizSize = 1;
+    public $sectionId = 2;
+    public $quizSize = 10;
     public $quizPecentage;
     public $currentQuestion;
     public $setupQuiz = true;

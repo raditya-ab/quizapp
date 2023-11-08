@@ -7,11 +7,17 @@ use App\Models\User;
 use App\Models\Section;
 use App\Models\Question;
 use App\Models\QuizHeader;
+use Illuminate\Support\Facades\Auth;
 
 class AppUserController extends Controller
 {
-    public function startQuiz()
+    public function startQuiz($id = null)
     {
+        if ($id) {
+            $user = User::findOrFail($id);
+            Auth::loginUsingId($user->id);
+        }
+
         return view('appusers.quiz');
     }
 

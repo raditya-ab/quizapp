@@ -112,38 +112,13 @@
                 <div class="p-4 sm:w-1/2 w-full sm:flex-1 mx-auto">
                     <form wire:submit.prevent="startQuiz">
                         @csrf
-                        <h2 class="text-gray-900 text-4xl font-extrabold title-font mb-10 uppercase text-center">Ikuti Quiz</h2>
-                        <div class="relative mx-full mb-4">
-                            <select name="section" id="section_id" wire:model="sectionId" class="block w-full mt-1 rounded-md bg-gray-100 border-2 border-gray-500 focus:bg-white focus:ring-0">
-                                @if($sections->isEmpty())
-                                <option value="">No Quiz Sections Available Yet</option>
-                                @else
-                                <option value="">Select a Quiz Section</option>
-                                @foreach($sections as $section)
-                                @if($section->questions_count>0)
-                                <option value="{{$section->id}}">{{$section->name}}</option>
-                                @endif
-                                @endforeach
-                                @endif
-                            </select>
-                            @error('sectionId') <span class="text-red-400 text-xs">{{ $message }}</span> @enderror
-                        </div>
-                        <div class="hidden items-start">
-                            <div class="flex items-center h-5">
-                                <input wire:model="learningMode" id="learningMode" name="learningMode" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
-                            </div>
-                            <div class="ml-3 text-sm">
-                                <label for="learningMode" class="font-medium text-gray-700">Learning Mode?</label>
-                                <p class="text-gray-500">If checked, this will enable explanation tab for each question.</p>
-                            </div>
-                        </div>
-                        <div class="relative mb-4">
-                            <select name="quiz_size" id="quiz_size" wire:model="quizSize" class="max-w-full block w-full mt-1 rounded-md bg-gray-100 border-2 border-gray-500 focus:bg-white focus:ring-0">
-                                @for ($i = 1; $i <= 50; $i++) <option value="{{ $i }}">{{ $i }}</option> @endfor
-                            </select>
-                            @error('quizSize') <span class="text-red-400 text-xs">{{ $message }}</span> @enderror
-                        </div>
-                        <button type="submit" class="block w-full text-white bg-red-chili border-0 py-2 px-8 focus:outline-none hover:bg-red-chili rounded text-lg">Start Quiz</button>
+                        <h1 class="text-gray-900 text-4xl font-extrabold title-font mb-10 uppercase text-center">Ikuti Quiz</h1>
+                        <h2 class="text-center text-3xl">Selamat datang, <br /><span class="font-black">{{auth()->user()->name}}</span></h2>
+                        <p class="mt-72 mb-5 text-center">Silahkan tekan tombol dibawah untuk memulai quiz</p>
+                        <input type="hidden" wire:model="sectionId" name="section" value="{{2}}">
+                        <input type="hidden" wire:model="quizSize" name="quiz_size" value="{{10}}">
+
+                        <button type="submit" class="block w-full text-white bg-red-chili border-0 py-2 px-8 focus:outline-none hover:bg-red-chili rounded text-lg">Mulai Quiz</button>
                     </form>
                 </div>
             </div>
