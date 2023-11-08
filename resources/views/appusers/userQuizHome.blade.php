@@ -52,14 +52,14 @@
                     </div>
                 </section>
 
-                <!-- <section class="text-gray-600 body-font">
+                <section class="text-gray-600 body-font">
                     <div class="p-4 w-full">
                         <div class="container px-5 py-5 mx-auto" id="chart">
                         </div>
                     </div>
-                </section> -->
-                <!-- --------------------- START NEW TABLE --------------------->
-                <!-- @if($userQuizzes->isEmpty())
+                </section>
+                <!----------------------- START NEW TABLE --------------------->
+                @if($userQuizzes->isEmpty())
                 <div class="px-4 py-5 sm:px-6">
                     <h1 class="text-sm leading-6 font-medium text-gray-900">
                         No Quizzes found!
@@ -143,9 +143,9 @@
                             {{ $userQuizzes->links() }}
                         </div>
                     </div>
-                </div> -->
+                </div>
                 <!-- ---------------- END NEW TABLE --------------------- -->
-                <!-- @endif -->
+                @endif
             </div>
         </div>
     </div>

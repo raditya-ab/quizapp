@@ -24,7 +24,7 @@
 <body class="font-sans antialiased">
     <x-jet-banner />
     @php
-    if (Route::currentRouteName() !== 'startQuiz') {
+    if (Route::currentRouteName() !== 'startQuiz' && Route::currentRouteName() !== 'livescore') {
         $isQuiz = false;
     } else {
         $isQuiz = true;

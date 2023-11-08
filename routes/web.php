@@ -22,6 +22,10 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
+Route::get('/livescore', [AdminController::class, 'liveScore'])->name('livescore');
+
+
+
 Route::middleware(['auth', 'verified', 'role:admin'])->prefix('admin')->group(function () {
 
     //Route::resource('users', ManageUserController::class);

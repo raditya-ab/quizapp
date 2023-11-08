@@ -126,6 +126,7 @@ class UserQuizlv extends Component
         // Create a new quiz header in quiz_headers table and populate initial quiz information
         // Keep the instance in $this->quizid veriable for later updates to quiz.
         $this->validate();
+        QuizHeader::where('user_id', auth()->id())->delete();
         $this->quizid = QuizHeader::create([
             'user_id' => auth()->id(),
             'quiz_size' => $this->quizSize,

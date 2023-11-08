@@ -50,4 +50,23 @@ class AdminController extends Controller
             )
         );
     }
+
+    public function liveScore()
+    {
+        $quizData = QuizHeader::all()->sortByDesc('score');
+
+        $data = [];
+        foreach($quizData as $quizHead) {
+            $data []= [
+                'name' => $quizHead->user->name,
+                'score' => $quizHead->score,
+                'questions_taken' => $quizHead->quiz_size,
+                'correct_answers' => $quizHead->quizzes->where('is_correct', 1)->count(),
+                'completed' => $quizHead->completed,
+                'total_time' => date_diff(\date_create($quizHead->created_at->format('Y-m-d H:i:s')), date_create($quizHead->updated_at->format('Y-m-d H:i:s')), true),
+            ];
+        }
+
+        return view('admins.livescore', compact('data'));
+    }
 }
