@@ -91,7 +91,7 @@
                     </div>
                     <div class="p-2 sm:w-1/2 w-full">
                         <div class="bg-gray-100 rounded flex p-4 h-full items-center justify-center flex-col font-bold">
-                            <p class="block title-font font-bold mr-5 text-red-pdi uppercase">Total Waktu</p><p class="title-font font-bold">{{ $quizPecentage > 70 ? 'Pass' : 'Fail' }}</p>
+                            <p class="block title-font font-bold mr-5 text-red-pdi uppercase">Total Waktu</p><p class="title-font font-bold">{{ date("i:s", $time_taken) }}</p>
                         </div>
                     </div>
                     <div class="p-2 sm:w-1/2 w-full">

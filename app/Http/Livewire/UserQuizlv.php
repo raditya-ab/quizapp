@@ -28,6 +28,7 @@ class UserQuizlv extends Component
     public $learningMode = false;
     public $quizInProgress = false;
     public $answeredQuestions = [];
+    public $time_taken = 0;
 
     protected $rules = [
         'sectionId' => 'required',
@@ -44,6 +45,8 @@ class UserQuizlv extends Component
         $this->currectQuizAnswers = Quiz::where('quiz_header_id', $this->quizid->id)
             ->where('is_correct', '1')
             ->count();
+
+        $this->time_taken = $this->quizid->updated_at->diff($this->quizid->created_at)->format('%H:%I:%S');
 
         // Caclculate score for upding the quiz_header table before finishing the quid.
         $this->quizPecentage = round(($this->currectQuizAnswers / $this->totalQuizQuestions) * 100, 2);
