@@ -31,8 +31,11 @@
             </div>
             <div class="text-center uppercase text-2xl font-bold flex justify-center items-center">{{ $datum['correct_answers'] }}</div>
             <div class="text-center uppercase text-2xl font-bold flex justify-center items-center">{{ date("i:s", $datum['total_time']) }}</div>
-            <div class="text-center uppercase text-lg font-bold flex justify-start items-center">
-              <progress class="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto" id="quiz-{{$i}}" value="{{ $datum['realtime_score'] }}" max="100"> {{ $datum['realtime_score'] }} </progress>{{ $datum['realtime_score'] }}%
+            <div class="text-center uppercase text-lg font-bold flex justify-start items-center w-full">
+              <div class="basis-3/4 w-3/4 mr-3">
+                <progress class="text-base leading-relaxed mr-2 w-full" id="quiz-{{$i}}" value="{{ $datum['realtime_score'] }}" max="100"> {{ $datum['realtime_score'] }} </progress>
+              </div>
+              <div class="w-1/4 basis-1/4">{{ $datum['realtime_score'] }}%</div>
             </div>
           </div>
           @endforeach
